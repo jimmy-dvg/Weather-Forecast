@@ -1,4 +1,25 @@
 import { useEffect, useRef, useState } from 'react'
+import {
+  WiCloud,
+  WiDayCloudy,
+  WiDayRain,
+  WiDayShowers,
+  WiDaySnow,
+  WiDaySunny,
+  WiFog,
+  WiHail,
+  WiNightAltCloudy,
+  WiNightAltRain,
+  WiNightAltShowers,
+  WiNightAltSnow,
+  WiNightClear,
+  WiRain,
+  WiShowers,
+  WiSleet,
+  WiSnow,
+  WiSprinkle,
+  WiThunderstorm,
+} from 'react-icons/wi'
 import './App.css'
 
 const weatherCodeDescriptions = {
@@ -36,16 +57,26 @@ function getWeatherDescription(code) {
   return weatherCodeDescriptions[code] || 'Unknown conditions'
 }
 
-function getWeatherIcon(code, isDay = 1) {
-  if (code === 0) return isDay ? '☀️' : '🌙'
-  if ([1, 2].includes(code)) return isDay ? '🌤️' : '🌥️'
-  if (code === 3) return '☁️'
-  if ([45, 48].includes(code)) return '🌫️'
-  if ([51, 53, 55, 56, 57].includes(code)) return '🌦️'
-  if ([61, 63, 65, 66, 67, 80, 81, 82].includes(code)) return '🌧️'
-  if ([71, 73, 75, 77, 85, 86].includes(code)) return '❄️'
-  if ([95, 96, 99].includes(code)) return '⛈️'
-  return '🌈'
+function getWeatherIconElement(code, isDay = 1) {
+  const day = Number(isDay) === 1
+
+  if (code === 0) return day ? <WiDaySunny /> : <WiNightClear />
+  if ([1, 2].includes(code)) return day ? <WiDayCloudy /> : <WiNightAltCloudy />
+  if (code === 3) return <WiCloud />
+  if ([45, 48].includes(code)) return <WiFog />
+  if ([51, 53, 55].includes(code)) return day ? <WiSprinkle /> : <WiNightAltShowers />
+  if ([56, 57].includes(code)) return <WiSleet />
+  if ([61, 63].includes(code)) return day ? <WiDayShowers /> : <WiNightAltShowers />
+  if ([65, 80, 81, 82].includes(code)) return day ? <WiDayRain /> : <WiNightAltRain />
+  if ([66, 67].includes(code)) return <WiSleet />
+  if ([71, 73, 75, 77, 85, 86].includes(code)) return day ? <WiDaySnow /> : <WiNightAltSnow />
+  if (code === 95) return <WiThunderstorm />
+  if ([96, 99].includes(code)) return <WiHail />
+  return <WiRain />
+}
+
+function WeatherIcon({ code, isDay = 1 }) {
+  return getWeatherIconElement(code, isDay)
 }
 
 function formatWeekday(dateText) {
@@ -468,7 +499,7 @@ function App() {
 
               <div className="current-main">
                 <span className="icon-large" aria-hidden="true">
-                  {getWeatherIcon(result.current.weather_code, result.current.is_day)}
+                  <WeatherIcon code={result.current.weather_code} isDay={result.current.is_day} />
                 </span>
                 <div>
                   <p className="temp-large">
@@ -501,7 +532,7 @@ function App() {
                   <p className="day-name">{formatWeekday(day.date)}</p>
                   <p className="day-date">{formatLongDate(day.date)}</p>
                   <p className="icon-small" aria-hidden="true">
-                    {getWeatherIcon(day.weatherCode, 1)}
+                    <WeatherIcon code={day.weatherCode} isDay={1} />
                   </p>
                   <p className="day-condition">{getWeatherDescription(day.weatherCode)}</p>
                   <p className="day-temp">
