@@ -1,16 +1,41 @@
-# React + Vite
+# Weather App (React + Vite)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Simple weather app built with React and Vite.
 
-Currently, two official plugins are available:
+## What It Does
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Search by city name and click Search.
+- Fetches location data from Open-Meteo Geocoding API.
+- Fetches current weather + next 5 days forecast from Open-Meteo Forecast API.
+- Shows weather condition icons using the external react-icons library.
+- Supports Celsius/Fahrenheit toggle.
+- Supports Use my location (browser geolocation).
+- Stores recent city searches in local storage.
 
-## React Compiler
+## Tech
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React
+- Vite
+- Open-Meteo APIs
+- react-icons
 
-## Expanding the ESLint configuration
+## Project Files
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Main UI and logic: src/App.jsx
+- Styles: src/App.css, src/index.css
+
+## Run Locally
+
+1. Install dependencies:
+	npm install
+2. Start dev server:
+	npm run dev
+3. Build for production:
+	npm run build
+4. Lint:
+	npm run lint
+
+## Notes
+
+- No API key is required for Open-Meteo.
+- If geolocation permission is denied, city search still works normally.
