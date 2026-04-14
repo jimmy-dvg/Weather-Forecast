@@ -265,6 +265,42 @@ h1 {
 	line-height: 1;
 }
 
+.icon-tone {
+	filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.12));
+}
+
+.icon-tone--sun {
+	color: #f2a20f;
+}
+
+.icon-tone--cloud {
+	color: #6f87a8;
+}
+
+.icon-tone--fog {
+	color: #8a97ad;
+}
+
+.icon-tone--drizzle {
+	color: #2f8aa6;
+}
+
+.icon-tone--rain {
+	color: #2567a8;
+}
+
+.icon-tone--sleet {
+	color: #5d80b8;
+}
+
+.icon-tone--snow {
+	color: #4e80a2;
+}
+
+.icon-tone--storm {
+	color: #4c4f8f;
+}
+
 .temp-large {
 	margin: 0;
 	font-size: clamp(2rem, 5.5vw, 3.1rem);

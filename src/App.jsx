@@ -57,26 +57,27 @@ function getWeatherDescription(code) {
   return weatherCodeDescriptions[code] || 'Unknown conditions'
 }
 
-function getWeatherIconElement(code, isDay = 1) {
+function getWeatherIconConfig(code, isDay = 1) {
   const day = Number(isDay) === 1
 
-  if (code === 0) return day ? <WiDaySunny /> : <WiNightClear />
-  if ([1, 2].includes(code)) return day ? <WiDayCloudy /> : <WiNightAltCloudy />
-  if (code === 3) return <WiCloud />
-  if ([45, 48].includes(code)) return <WiFog />
-  if ([51, 53, 55].includes(code)) return day ? <WiSprinkle /> : <WiNightAltShowers />
-  if ([56, 57].includes(code)) return <WiSleet />
-  if ([61, 63].includes(code)) return day ? <WiDayShowers /> : <WiNightAltShowers />
-  if ([65, 80, 81, 82].includes(code)) return day ? <WiDayRain /> : <WiNightAltRain />
-  if ([66, 67].includes(code)) return <WiSleet />
-  if ([71, 73, 75, 77, 85, 86].includes(code)) return day ? <WiDaySnow /> : <WiNightAltSnow />
-  if (code === 95) return <WiThunderstorm />
-  if ([96, 99].includes(code)) return <WiHail />
-  return <WiRain />
+  if (code === 0) return { icon: day ? WiDaySunny : WiNightClear, tone: 'sun' }
+  if ([1, 2].includes(code)) return { icon: day ? WiDayCloudy : WiNightAltCloudy, tone: 'cloud' }
+  if (code === 3) return { icon: WiCloud, tone: 'cloud' }
+  if ([45, 48].includes(code)) return { icon: WiFog, tone: 'fog' }
+  if ([51, 53, 55].includes(code)) return { icon: day ? WiSprinkle : WiNightAltShowers, tone: 'drizzle' }
+  if ([56, 57].includes(code)) return { icon: WiSleet, tone: 'sleet' }
+  if ([61, 63].includes(code)) return { icon: day ? WiDayShowers : WiNightAltShowers, tone: 'rain' }
+  if ([65, 80, 81, 82].includes(code)) return { icon: day ? WiDayRain : WiNightAltRain, tone: 'rain' }
+  if ([66, 67].includes(code)) return { icon: WiSleet, tone: 'sleet' }
+  if ([71, 73, 75, 77, 85, 86].includes(code)) return { icon: day ? WiDaySnow : WiNightAltSnow, tone: 'snow' }
+  if (code === 95) return { icon: WiThunderstorm, tone: 'storm' }
+  if ([96, 99].includes(code)) return { icon: WiHail, tone: 'storm' }
+  return { icon: WiRain, tone: 'rain' }
 }
 
 function WeatherIcon({ code, isDay = 1 }) {
-  return getWeatherIconElement(code, isDay)
+  const { icon: IconComponent, tone } = getWeatherIconConfig(code, isDay)
+  return <IconComponent className={`icon-tone icon-tone--${tone}`} />
 }
 
 function formatWeekday(dateText) {
