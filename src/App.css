@@ -89,6 +89,61 @@ h1 {
 	line-height: 0.95;
 }
 
+.top-controls {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 12px;
+	flex-wrap: wrap;
+}
+
+.unit-toggle {
+	display: inline-flex;
+	border: 1px solid var(--line);
+	border-radius: 999px;
+	overflow: hidden;
+	background: rgba(255, 255, 255, 0.85);
+}
+
+.unit-toggle button {
+	border: none;
+	background: transparent;
+	padding: 8px 12px;
+	font: inherit;
+	font-size: 0.85rem;
+	font-weight: 600;
+	color: var(--ink-soft);
+	cursor: pointer;
+}
+
+.unit-toggle button.active {
+	background: linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
+	color: #fff;
+}
+
+.geo-btn {
+	border: 1px solid var(--line);
+	border-radius: 999px;
+	padding: 8px 14px;
+	font: inherit;
+	font-size: 0.86rem;
+	font-weight: 700;
+	color: var(--ink);
+	background: rgba(255, 255, 255, 0.8);
+	cursor: pointer;
+	transition: transform 180ms ease;
+}
+
+.geo-btn:hover:not(:disabled) {
+	transform: translateY(-1px);
+}
+
+.geo-btn:disabled {
+	opacity: 0.65;
+	cursor: wait;
+}
+
 .search-form {
 	display: grid;
 	grid-template-columns: 1fr auto;
@@ -145,6 +200,37 @@ h1 {
 .status.error {
 	color: #9c2e22;
 	font-weight: 600;
+}
+
+.history {
+	margin-top: 10px;
+	display: grid;
+	gap: 8px;
+}
+
+.history p {
+	margin: 0;
+	font-size: 0.82rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.07em;
+	color: var(--ink-soft);
+}
+
+.history div {
+	display: flex;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.history button {
+	border: 1px solid var(--line);
+	border-radius: 999px;
+	padding: 5px 10px;
+	background: rgba(255, 255, 255, 0.86);
+	font: inherit;
+	font-size: 0.82rem;
+	cursor: pointer;
 }
 
 .current-card {
@@ -323,6 +409,22 @@ h1 {
 }
 
 @media (max-width: 520px) {
+	.top-controls {
+		align-items: stretch;
+	}
+
+	.unit-toggle {
+		width: 100%;
+	}
+
+	.unit-toggle button {
+		flex: 1;
+	}
+
+	.geo-btn {
+		width: 100%;
+	}
+
 	.search-form {
 		grid-template-columns: 1fr;
 	}
